@@ -1,0 +1,716 @@
+// frontend/src/pages/Register.jsx
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
+import axios from 'axios';
+
+const Register = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    password: '',
+    role: 'candidate', // 'candidate' or 'recruiter'
+    company_id: '',
+    position: ''
+  });
+  const [companies, setCompanies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(true);
+  
+  const { register, isAuthenticated } = useAuth();
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  // If already authenticated, redirect
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Retrieve companies list for recruiters selection
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/companies');
+        if (response.data.success) {
+          setCompanies(response.data.data);
+        }
+      } catch (err) {
+        console.error('Failed to load companies helper list:', err);
+      }
+    };
+    fetchCompanies();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = 'https://accounts.google.com/signin';
+  };
+
+  const handleLinkedInLogin = () => {
+    window.location.href = 'https://www.linkedin.com/login';
+  };
+
+  const handleRoleChange = (targetRole) => {
+    setFormData((prev) => ({ ...prev, role: targetRole }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, phone, email, password, role, company_id, position } = formData;
+
+    if (!name || !email || !password) {
+      showToast('Please complete all required fields.', 'warning');
+      return;
+    }
+
+    // Password requirements: Min 8 characters, uppercase, lowercase, number, special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      showToast('Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.', 'warning');
+      return;
+    }
+
+    if (role === 'recruiter' && !company_id) {
+      showToast('Recruiters must select an associated company.', 'warning');
+      return;
+    }
+
+    if (!agreeTerms) {
+      showToast('You must agree to the Terms and Conditions to proceed.', 'warning');
+      return;
+    }
+
+    // Split Name into first_name and last_name for backend support
+    const nameParts = name.trim().split(/\s+/);
+    const first_name = nameParts[0] || '';
+    const last_name = nameParts.slice(1).join(' ') || '.';
+
+    // Format phone with static +91 prefix if phone is filled
+    const formattedPhone = phone ? `+91 ${phone.trim()}` : '';
+
+    setLoading(true);
+    const result = await register({
+      first_name,
+      last_name,
+      email,
+      phone: formattedPhone,
+      password,
+      confirm_password: password,
+      role,
+      company_id: role === 'recruiter' ? parseInt(company_id) : undefined,
+      position: role === 'recruiter' ? position : undefined
+    });
+    setLoading(false);
+
+    if (result.success) {
+      navigate('/login');
+    }
+  };
+
+  return (
+    <main className="register-page animate-fade">
+      <div className="register-landscape-card">
+        {/* Left Toggle Panel */}
+        <div className="register-left-panel">
+          <div className="left-panel-content">
+            <h2 className="left-title">Already have an account ?</h2>
+            <Link to="/login" className="left-toggle-btn">
+              Sign-in
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Glass Form Panel */}
+        <div className="register-right-panel">
+          <div className="register-glass-card">
+            <form onSubmit={handleSubmit} className="auth-form-theme">
+              
+              {/* Role Picker Buttons */}
+              <div className="role-picker-container">
+                <button
+                  type="button"
+                  className={`role-btn ${formData.role === 'candidate' ? 'active' : ''}`}
+                  onClick={() => handleRoleChange('candidate')}
+                >
+                  Candidate
+                </button>
+                <button
+                  type="button"
+                  className={`role-btn ${formData.role === 'recruiter' ? 'active' : ''}`}
+                  onClick={() => handleRoleChange('recruiter')}
+                >
+                  Recruiter / Employer
+                </button>
+              </div>
+
+              {/* Double Column Row: Name and Phone */}
+              <div className="auth-row-double">
+                {/* Name Input */}
+                <div className="auth-input-wrapper">
+                  <div className="auth-input-bar" />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Fullname"
+                    className="auth-input-field"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                {/* Phone Input with country code */}
+                <div className="auth-input-wrapper">
+                  <div className="auth-input-bar" />
+                  <span className="phone-country-code">+91 |</span>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="9182177208"
+                    className="phone-input-field text-phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Email Input */}
+              <div className="auth-input-wrapper">
+                <div className="auth-input-bar" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="abc@gmail.com"
+                  className="auth-input-field"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Password Input */}
+              <div className="auth-input-wrapper">
+                <div className="auth-input-bar" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  placeholder="Password@1234"
+                  className="auth-input-field"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+                </button>
+              </div>
+
+              {/* Recruiter-Specific Fields */}
+              {formData.role === 'recruiter' && (
+                <div className="recruiter-fields animate-fade">
+                  {/* Company Picker */}
+                  <div className="auth-input-wrapper select-wrapper">
+                    <div className="auth-input-bar" />
+                    <select
+                      name="company_id"
+                      className="auth-select-field"
+                      value={formData.company_id}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select Associated Company *</option>
+                      {companies.map((company) => (
+                        <option key={company.id} value={company.id}>
+                          {company.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Position Input */}
+                  <div className="auth-input-wrapper">
+                    <div className="auth-input-bar" />
+                    <input
+                      type="text"
+                      id="position"
+                      name="position"
+                      placeholder="Your HR Position (e.g. Hiring Manager)"
+                      className="auth-input-field"
+                      value={formData.position}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Terms Checkbox */}
+              <label className="checkbox-container terms-checkbox">
+                <input
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                />
+                <span className="checkbox-text">
+                  I agree to all the <span className="bold-white-text">Terms and Conditions</span> according to the platform norms
+                </span>
+              </label>
+
+              {/* Submit Button */}
+              <button type="submit" className="auth-submit-btn" disabled={loading}>
+                {loading ? (
+                  <span className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px', borderColor: '#ffffff', borderTopColor: 'transparent' }} />
+                ) : (
+                  'Sign-Up'
+                )}
+              </button>
+
+              {/* Social Login Buttons */}
+              <div className="social-buttons-row">
+                <button type="button" className="social-login-btn google" onClick={handleGoogleLogin}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-icon">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22c-.87-2.6-2.86-4.53-5.84-4.53z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                  </svg>
+                  <span>Login via Google</span>
+                </button>
+                <button type="button" className="social-login-btn linkedin" onClick={handleLinkedInLogin}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-icon">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="#0077B5"/>
+                  </svg>
+                  <span>Login via LinkedIn</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .register-page {
+          min-height: calc(100vh - 72px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: var(--bg-primary);
+          padding: 40px 20px;
+          font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .register-landscape-card {
+          display: flex;
+          width: 100%;
+          max-width: 1040px;
+          min-height: 660px;
+          background: url('/sunset_lake.png') no-repeat center center / cover;
+          border-radius: 40px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .register-landscape-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.05);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .register-left-panel {
+          position: relative;
+          z-index: 2;
+          width: 38%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 60px 40px;
+        }
+
+        .left-panel-content {
+          text-align: center;
+          max-width: 320px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .left-title {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 26px;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 1.35;
+          margin-bottom: 30px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .left-toggle-btn {
+          display: inline-block;
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 22px;
+          font-weight: 400;
+          color: #ffffff;
+          background-color: rgba(255, 255, 255, 0.18);
+          border: 1px solid #ffffff;
+          border-radius: 16px;
+          padding: 12px 45px;
+          transition: all 0.3s ease;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .left-toggle-btn:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+          border-color: #ffffff;
+          transform: scale(1.03);
+          box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .register-right-panel {
+          position: relative;
+          z-index: 2;
+          width: 62%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 60px;
+        }
+
+        .register-glass-card {
+          width: 100%;
+          max-width: 540px;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px) saturate(110%);
+          -webkit-backdrop-filter: blur(12px) saturate(110%);
+          border-radius: 30px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+          padding: 36px;
+        }
+
+        .auth-form-theme {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        /* Role Picker Buttons */
+        .role-picker-container {
+          display: flex;
+          background-color: rgba(0, 0, 0, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          border-radius: 14px;
+          overflow: hidden;
+          margin-bottom: 24px;
+          padding: 4px;
+        }
+
+        .role-btn {
+          flex: 1;
+          background: transparent;
+          border: none;
+          outline: none;
+          color: rgba(255, 255, 255, 0.85);
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 15px;
+          font-weight: 600;
+          padding: 10px 0;
+          cursor: pointer;
+          border-radius: 10px;
+          transition: all 0.2s ease;
+        }
+
+        .role-btn.active {
+          background-color: #ff5100;
+          color: #ffffff;
+          box-shadow: 0 4px 10px rgba(255, 81, 0, 0.25);
+        }
+
+        .auth-row-double {
+          display: flex;
+          gap: 16px;
+          width: 100%;
+        }
+
+        .auth-input-wrapper {
+          display: flex;
+          align-items: stretch;
+          background-color: #ffffff;
+          border-radius: 14px;
+          height: 52px;
+          overflow: hidden;
+          margin-bottom: 20px;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+          position: relative;
+          flex: 1;
+        }
+
+        .auth-input-bar {
+          width: 12px;
+          background-color: #ff5100;
+          flex-shrink: 0;
+        }
+
+        .auth-input-field {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0 16px 0 20px;
+          flex-grow: 1;
+          font-size: 16.5px;
+          font-weight: 500;
+          color: #333333;
+          height: 100%;
+          width: 100%;
+        }
+
+        .auth-input-field::placeholder {
+          color: #888888;
+          font-weight: 400;
+          font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        /* Select box specific classes */
+        .select-wrapper {
+          background-color: #ffffff;
+        }
+
+        .auth-select-field {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0 20px;
+          flex-grow: 1;
+          font-size: 16px;
+          font-weight: 500;
+          color: #333333;
+          height: 100%;
+          width: 100%;
+          cursor: pointer;
+        }
+
+        .phone-country-code {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 16.5px;
+          font-weight: 500;
+          color: #333333;
+          display: flex;
+          align-items: center;
+          padding-left: 16px;
+          user-select: none;
+          white-space: nowrap;
+        }
+
+        .text-phone {
+          padding-left: 8px !important;
+        }
+
+        .password-toggle-btn {
+          border: none;
+          background: transparent;
+          padding: 0 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ff5100;
+          cursor: pointer;
+          transition: color 0.2s ease;
+        }
+
+        .password-toggle-btn:hover {
+          color: #cc4100;
+        }
+
+        .checkbox-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          user-select: none;
+        }
+
+        .checkbox-container input {
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+          accent-color: #ff5100;
+        }
+
+        .checkbox-text {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 13.5px;
+          color: #ffffff;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+          line-height: 1.4;
+        }
+
+        .bold-white-text {
+          font-weight: 700;
+          color: #ffffff;
+        }
+
+        .terms-checkbox {
+          margin-bottom: 20px;
+        }
+
+        .auth-submit-btn {
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 20px;
+          font-weight: 500;
+          color: #ffffff;
+          background-color: #ff5100;
+          border: none;
+          border-radius: 14px;
+          height: 52px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: 0 6px 20px rgba(255, 81, 0, 0.35);
+          margin-bottom: 20px;
+        }
+
+        .auth-submit-btn:hover {
+          background-color: #e04800;
+          transform: translateY(-1px);
+          box-shadow: 0 8px 24px rgba(255, 81, 0, 0.45);
+        }
+
+        .auth-submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .social-buttons-row {
+          display: flex;
+          gap: 14px;
+          width: 100%;
+        }
+
+        .social-login-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          height: 48px;
+          background-color: rgba(255, 255, 255, 0.15);
+          border: 1px solid #ff5100;
+          border-radius: 14px;
+          font-family: 'Georgia', 'Times New Roman', serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: #ff5100;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .social-login-btn:hover {
+          background-color: rgba(255, 81, 0, 0.15);
+          border-color: #ff854d;
+          color: #ff5100;
+          transform: translateY(-1px);
+        }
+
+        .social-icon {
+          flex-shrink: 0;
+        }
+
+        /* Animation */
+        .recruiter-fields {
+          margin-top: 4px;
+        }
+
+        @media (max-width: 992px) {
+          .register-landscape-card {
+            flex-direction: column;
+            min-height: auto;
+            border-radius: 30px;
+          }
+
+          .register-left-panel {
+            width: 100%;
+            padding: 40px 20px 20px 20px;
+          }
+
+          .left-title {
+            margin-bottom: 16px;
+            font-size: 22px;
+          }
+
+          .left-toggle-btn {
+            font-size: 18px;
+            padding: 8px 30px;
+            border-radius: 12px;
+          }
+
+          .register-right-panel {
+            width: 100%;
+            padding: 20px 24px 40px 24px;
+          }
+
+          .register-glass-card {
+            max-width: 100%;
+            padding: 24px;
+            border-radius: 24px;
+          }
+
+          .auth-row-double {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          .auth-input-wrapper {
+            height: 50px;
+            margin-bottom: 18px;
+            width: 100%;
+          }
+
+          .auth-submit-btn {
+            height: 50px;
+            font-size: 18px;
+            border-radius: 12px;
+          }
+
+          .social-login-btn {
+            height: 48px;
+            font-size: 13.5px;
+            border-radius: 12px;
+          }
+        }
+      `}</style>
+    </main>
+  );
+};
+
+export default Register;

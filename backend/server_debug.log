@@ -1,0 +1,111 @@
+[REQUEST] 2026-07-09T02:41:10.854Z HEAD / AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:10.888Z HEAD / status=200: {"success":true,"message":"Welcome to the Job Portal Platform API."}
+
+[REQUEST] 2026-07-09T02:41:10.911Z GET / AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:10.914Z GET / status=200: {"success":true,"message":"Welcome to the Job Portal Platform API."}
+
+[REQUEST] 2026-07-09T02:41:14.492Z GET /api/jobs/skills AuthHeader: none
+[REQUEST] 2026-07-09T02:41:14.530Z OPTIONS /api/auth/refresh-token AuthHeader: none
+[REQUEST] 2026-07-09T02:41:14.536Z OPTIONS /api/auth/refresh-token AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:14.663Z GET /api/jobs/skills status=200: {"success":true,"data":[{"id":159,"name":"AWS","created_at":"2026-07-01T02:17:59.594Z"},{"id":180,"name":"CI/CD","created_at":"2026-07-01T02:17:59.594Z"},{"id":164,"name":"CSS3","created_at":"2026-07-01T02:17:59.594Z"},{"id":177,"name":"Cybersecurity","created_at":"2026-07-01T02:17:59.594Z"},{"id":1
+
+[REQUEST] 2026-07-09T02:41:14.672Z GET /api/jobs/skills AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:14.678Z GET /api/jobs/skills status=200: {"success":true,"data":[{"id":159,"name":"AWS","created_at":"2026-07-01T02:17:59.594Z"},{"id":180,"name":"CI/CD","created_at":"2026-07-01T02:17:59.594Z"},{"id":164,"name":"CSS3","created_at":"2026-07-01T02:17:59.594Z"},{"id":177,"name":"Cybersecurity","created_at":"2026-07-01T02:17:59.594Z"},{"id":1
+
+[REQUEST] 2026-07-09T02:41:14.702Z POST /api/auth/refresh-token AuthHeader: none
+[REQUEST] 2026-07-09T02:41:14.911Z POST /api/auth/refresh-token AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:15.102Z POST /api/auth/refresh-token status=200: {"success":true,"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4"}
+
+[RESPONSE] 2026-07-09T02:41:15.118Z POST /api/auth/refresh-token status=200: {"success":true,"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4"}
+
+[REQUEST] 2026-07-09T02:41:15.208Z OPTIONS /api/companies/my-company AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.216Z OPTIONS /api/admin/public/categories AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.222Z OPTIONS /api/companies/my-company AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.231Z OPTIONS /api/admin/public/categories AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.237Z GET /api/companies/my-company AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.254Z GET /api/admin/public/categories AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.284Z GET /api/admin/public/categories status=200: {"success":true,"data":[{"id":34,"name":"Design & Creative","description":"UI/UX interface design, graphic art, brand assets creation","created_at":"2026-07-01T02:17:59.373Z"},{"id":32,"name":"Finance & Accounts","description":"Corporate banking, taxation, investment, bookkeeping","created_at":"2026
+
+[REQUEST] 2026-07-09T02:41:15.299Z GET /api/admin/public/categories AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.306Z OPTIONS /api/admin/public/locations AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:15.314Z GET /api/admin/public/categories status=200: {"success":true,"data":[{"id":34,"name":"Design & Creative","description":"UI/UX interface design, graphic art, brand assets creation","created_at":"2026-07-01T02:17:59.373Z"},{"id":32,"name":"Finance & Accounts","description":"Corporate banking, taxation, investment, bookkeeping","created_at":"2026
+
+[RESPONSE] 2026-07-09T02:41:15.318Z GET /api/companies/my-company status=200: {"success":true,"data":{"id":101,"name":"TechSynergy","logo":"company_techsynergy.png","website":"https://techsynergy.io","description":"Next-generation AI and software consulting services.","email":"hr@techsynergy.com","phone":"+919876543210","industry":"Technology & Consulting Services","address":
+
+[REQUEST] 2026-07-09T02:41:15.329Z GET /api/admin/public/locations AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.338Z GET /api/companies/my-company AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.350Z GET /api/admin/public/locations status=200: {"success":true,"data":[{"id":38,"state":"Delhi NCR","city":"Delhi","created_at":"2026-07-01T02:17:59.375Z"},{"id":36,"state":"Karnataka","city":"Bangalore","created_at":"2026-07-01T02:17:59.375Z"},{"id":37,"state":"Maharashtra","city":"Mumbai","created_at":"2026-07-01T02:17:59.375Z"},{"id":39,"stat
+
+[REQUEST] 2026-07-09T02:41:15.361Z GET /api/admin/public/locations AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.383Z GET /api/admin/public/locations status=200: {"success":true,"data":[{"id":38,"state":"Delhi NCR","city":"Delhi","created_at":"2026-07-01T02:17:59.375Z"},{"id":36,"state":"Karnataka","city":"Bangalore","created_at":"2026-07-01T02:17:59.375Z"},{"id":37,"state":"Maharashtra","city":"Mumbai","created_at":"2026-07-01T02:17:59.375Z"},{"id":39,"stat
+
+[REQUEST] 2026-07-09T02:41:15.387Z GET /uploads/images/company_techsynergy.png AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.411Z OPTIONS /api/jobs?status=all&limit=100&company_id=101 AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.414Z OPTIONS /api/applications AuthHeader: none
+[RESPONSE] 2026-07-09T02:41:15.418Z GET /api/companies/my-company status=200: {"success":true,"data":{"id":101,"name":"TechSynergy","logo":"company_techsynergy.png","website":"https://techsynergy.io","description":"Next-generation AI and software consulting services.","email":"hr@techsynergy.com","phone":"+919876543210","industry":"Technology & Consulting Services","address":
+
+[RESPONSE] 2026-07-09T02:41:15.433Z GET /uploads/images/company_techsynergy.png status=404: {"success":false,"message":"Static file not found."}
+
+[REQUEST] 2026-07-09T02:41:15.436Z OPTIONS /api/interviews AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.445Z GET /api/jobs?status=all&limit=100&company_id=101 AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.457Z GET /api/applications AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.471Z OPTIONS /api/interviews AuthHeader: none
+[REQUEST] 2026-07-09T02:41:15.481Z GET /api/interviews AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.542Z GET /api/jobs?status=all&limit=100&company_id=101 status=200: {"success":true,"data":[{"id":601,"company_id":101,"title":"Associate Software Developer","description":"Job Summary\n\nWe are looking for a motivated Associate Software Developer to join our development team. The ideal candidate should have a strong understanding of programming fundamentals and be 
+
+[RESPONSE] 2026-07-09T02:41:15.552Z GET /api/interviews status=200: {"success":true,"data":[{"id":1,"application_id":97,"interview_date":"2026-07-06","interview_time":"12:00","interview_type":"Online","meeting_link":"https://meet.google.com/rto-ocdg-zae","venue":null,"interviewer_name":"Abrar","interviewer_email":"aliasis820@gmail.com","interview_round":"Technical R
+
+[REQUEST] 2026-07-09T02:41:15.562Z GET /api/jobs?status=all&limit=100&company_id=101 AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:41:15.578Z GET /api/interviews AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.591Z GET /api/applications status=200: {"success":true,"data":[{"id":99,"user_id":45,"job_id":601,"resume":"resume-1783316152512-528109186.pdf","skills":"React js, node js, Express js, Postgre Sql","cover_letter":"--- PERSONAL DETAILS ---\nFull Name: Abrar Ali\nContact Email: abrarali99890@gmail.com\nPhone Number: +917013712802\n\n--- ED
+
+[REQUEST] 2026-07-09T02:41:15.606Z GET /api/applications AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:41:15.618Z GET /api/interviews status=200: {"success":true,"data":[{"id":1,"application_id":97,"interview_date":"2026-07-06","interview_time":"12:00","interview_type":"Online","meeting_link":"https://meet.google.com/rto-ocdg-zae","venue":null,"interviewer_name":"Abrar","interviewer_email":"aliasis820@gmail.com","interview_round":"Technical R
+
+[RESPONSE] 2026-07-09T02:41:15.628Z GET /api/jobs?status=all&limit=100&company_id=101 status=200: {"success":true,"data":[{"id":601,"company_id":101,"title":"Associate Software Developer","description":"Job Summary\n\nWe are looking for a motivated Associate Software Developer to join our development team. The ideal candidate should have a strong understanding of programming fundamentals and be 
+
+[RESPONSE] 2026-07-09T02:41:15.646Z GET /api/applications status=200: {"success":true,"data":[{"id":99,"user_id":45,"job_id":601,"resume":"resume-1783316152512-528109186.pdf","skills":"React js, node js, Express js, Postgre Sql","cover_letter":"--- PERSONAL DETAILS ---\nFull Name: Abrar Ali\nContact Email: abrarali99890@gmail.com\nPhone Number: +917013712802\n\n--- ED
+
+[REQUEST] 2026-07-09T02:42:18.439Z GET /api/companies/my-company AuthHeader: none
+[RESPONSE] 2026-07-09T02:42:18.445Z GET /api/companies/my-company status=401: {"success":false,"message":"Access token required. Please log in."}
+
+[REQUEST] 2026-07-09T02:42:18.454Z GET /api/admin/public/categories AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.458Z GET /api/jobs/skills AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.461Z OPTIONS /api/companies/my-company AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.463Z OPTIONS /api/admin/public/categories AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.465Z OPTIONS /api/jobs/skills AuthHeader: none
+[RESPONSE] 2026-07-09T02:42:18.475Z GET /api/admin/public/categories status=200: {"success":true,"data":[{"id":34,"name":"Design & Creative","description":"UI/UX interface design, graphic art, brand assets creation","created_at":"2026-07-01T02:17:59.373Z"},{"id":32,"name":"Finance & Accounts","description":"Corporate banking, taxation, investment, bookkeeping","created_at":"2026
+
+[REQUEST] 2026-07-09T02:42:18.478Z GET /api/companies/my-company AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:42:18.486Z GET /api/jobs/skills status=200: {"success":true,"data":[{"id":159,"name":"AWS","created_at":"2026-07-01T02:17:59.594Z"},{"id":180,"name":"CI/CD","created_at":"2026-07-01T02:17:59.594Z"},{"id":164,"name":"CSS3","created_at":"2026-07-01T02:17:59.594Z"},{"id":177,"name":"Cybersecurity","created_at":"2026-07-01T02:17:59.594Z"},{"id":1
+
+[REQUEST] 2026-07-09T02:42:18.489Z GET /api/admin/public/categories AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:42:18.493Z GET /api/jobs/skills AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:42:18.496Z GET /api/admin/public/categories status=200: {"success":true,"data":[{"id":34,"name":"Design & Creative","description":"UI/UX interface design, graphic art, brand assets creation","created_at":"2026-07-01T02:17:59.373Z"},{"id":32,"name":"Finance & Accounts","description":"Corporate banking, taxation, investment, bookkeeping","created_at":"2026
+
+[RESPONSE] 2026-07-09T02:42:18.506Z GET /api/companies/my-company status=200: {"success":true,"data":{"id":101,"name":"TechSynergy","logo":"company_techsynergy.png","website":"https://techsynergy.io","description":"Next-generation AI and software consulting services.","email":"hr@techsynergy.com","phone":"+919876543210","industry":"Technology & Consulting Services","address":
+
+[RESPONSE] 2026-07-09T02:42:18.509Z GET /api/jobs/skills status=200: {"success":true,"data":[{"id":159,"name":"AWS","created_at":"2026-07-01T02:17:59.594Z"},{"id":180,"name":"CI/CD","created_at":"2026-07-01T02:17:59.594Z"},{"id":164,"name":"CSS3","created_at":"2026-07-01T02:17:59.594Z"},{"id":177,"name":"Cybersecurity","created_at":"2026-07-01T02:17:59.594Z"},{"id":1
+
+[REQUEST] 2026-07-09T02:42:18.591Z OPTIONS /api/admin/public/locations AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.598Z GET /api/admin/public/locations AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:42:18.608Z GET /api/admin/public/locations status=200: {"success":true,"data":[{"id":38,"state":"Delhi NCR","city":"Delhi","created_at":"2026-07-01T02:17:59.375Z"},{"id":36,"state":"Karnataka","city":"Bangalore","created_at":"2026-07-01T02:17:59.375Z"},{"id":37,"state":"Maharashtra","city":"Mumbai","created_at":"2026-07-01T02:17:59.375Z"},{"id":39,"stat
+
+[REQUEST] 2026-07-09T02:42:18.612Z GET /api/admin/public/locations AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:42:18.616Z GET /api/admin/public/locations status=200: {"success":true,"data":[{"id":38,"state":"Delhi NCR","city":"Delhi","created_at":"2026-07-01T02:17:59.375Z"},{"id":36,"state":"Karnataka","city":"Bangalore","created_at":"2026-07-01T02:17:59.375Z"},{"id":37,"state":"Maharashtra","city":"Mumbai","created_at":"2026-07-01T02:17:59.375Z"},{"id":39,"stat
+
+[REQUEST] 2026-07-09T02:42:18.637Z GET /uploads/images/company_techsynergy.png AuthHeader: none
+[RESPONSE] 2026-07-09T02:42:18.641Z GET /uploads/images/company_techsynergy.png status=404: {"success":false,"message":"Static file not found."}
+
+[REQUEST] 2026-07-09T02:42:18.658Z OPTIONS /api/jobs?status=all&limit=100&company_id=101 AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.660Z OPTIONS /api/applications AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.662Z OPTIONS /api/interviews AuthHeader: none
+[REQUEST] 2026-07-09T02:42:18.665Z GET /api/jobs?status=all&limit=100&company_id=101 AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:42:18.669Z GET /api/applications AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[REQUEST] 2026-07-09T02:42:18.674Z GET /api/interviews AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImVtYWlsIjoiYWxpYXNpczgyMEBnbWFpbC5jb20iLCJyb2xlIjoicmVjcnVpdGVyIiwiaWF0IjoxNzgzNTY0ODc1LCJleHAiOjE3ODM1NjU3NzV9.qgDkb9W6hnJhPPbhUaIEUK7nPGoQBUosCVgmd1dsng4
+[RESPONSE] 2026-07-09T02:42:18.688Z GET /api/interviews status=200: {"success":true,"data":[{"id":1,"application_id":97,"interview_date":"2026-07-06","interview_time":"12:00","interview_type":"Online","meeting_link":"https://meet.google.com/rto-ocdg-zae","venue":null,"interviewer_name":"Abrar","interviewer_email":"aliasis820@gmail.com","interview_round":"Technical R
+
+[RESPONSE] 2026-07-09T02:42:18.699Z GET /api/jobs?status=all&limit=100&company_id=101 status=200: {"success":true,"data":[{"id":601,"company_id":101,"title":"Associate Software Developer","description":"Job Summary\n\nWe are looking for a motivated Associate Software Developer to join our development team. The ideal candidate should have a strong understanding of programming fundamentals and be 
+
+[RESPONSE] 2026-07-09T02:42:18.713Z GET /api/applications status=200: {"success":true,"data":[{"id":99,"user_id":45,"job_id":601,"resume":"resume-1783316152512-528109186.pdf","skills":"React js, node js, Express js, Postgre Sql","cover_letter":"--- PERSONAL DETAILS ---\nFull Name: Abrar Ali\nContact Email: abrarali99890@gmail.com\nPhone Number: +917013712802\n\n--- ED
+

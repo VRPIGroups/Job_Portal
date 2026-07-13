@@ -1,0 +1,8 @@
+{
+  "minScore": 80,
+  "minExperienceYears": 2,
+  "rejectScore": 50,
+  "shortlistStatus": "Shortlisted",
+  "rejectStatus": "Rejected",
+  "fallbackStatus": "Under Review"
+}

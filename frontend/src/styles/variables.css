@@ -1,0 +1,121 @@
+/* frontend/src/styles/variables.css */
+
+:root {
+  /* Typographical tokens */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Spacers & Sizing defaults */
+  --container-max: 1240px;
+  
+  /* Radius tokens */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Variables */
+.theme-light {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+
+  /* Brand Accents */
+  --primary: #ff5100; /* Corporate Orange */
+  --primary-hover: #cc4100;
+  --primary-glow: rgba(255, 81, 0, 0.15);
+  
+  --accent: #e04800; /* Secondary Orange Accent */
+  --accent-hover: #c43f00;
+  --accent-glow: rgba(255, 81, 0, 0.1);
+
+  --peach-light: #ffebe0;
+  --peach-border: #ffd5be;
+
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.12);
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --danger-glow: rgba(239, 68, 68, 0.12);
+
+  /* Glassmorphism Accents */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --backdrop-blur: blur(14px);
+
+  /* Shadows System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 15px rgba(59, 130, 246, 0.15);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* Interactive Skeleton Accent */
+  --skeleton-bg: #e2e8f0;
+  --skeleton-shine: #f1f5f9;
+}
+
+/* Dark Theme Variables */
+.theme-dark {
+  --bg-primary: #060913;
+  --bg-secondary: #0d1324;
+  --bg-tertiary: #161f38;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  
+  --border-color: #1e293b;
+  --border-hover: #334155;
+
+  /* Brand Accents */
+  --primary: #ff6a25; /* Glowing Corporate Orange */
+  --primary-hover: #e04800;
+  --primary-glow: rgba(255, 106, 37, 0.25);
+  
+  --accent: #ff854d; /* Light Orange */
+  --accent-hover: #ff6a25;
+  --accent-glow: rgba(255, 106, 37, 0.2);
+
+  --peach-light: #2c1a11;
+  --peach-border: #4a2a19;
+
+  --success: #34d399;
+  --success-glow: rgba(52, 211, 153, 0.2);
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --danger-glow: rgba(248, 113, 113, 0.2);
+
+  /* Glassmorphism Accents */
+  --glass-bg: rgba(13, 19, 36, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --backdrop-blur: blur(16px);
+
+  /* Shadows System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.5), 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 25px rgba(96, 165, 250, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+
+  /* Interactive Skeleton Accent */
+  --skeleton-bg: #1e293b;
+  --skeleton-shine: #334155;
+}
