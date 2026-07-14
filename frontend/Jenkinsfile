@@ -65,16 +65,13 @@ pipeline {
             }
         }
 
-        stage('Deploy via Docker Compose') {
+        stage('Deploy via Docker Compose') { 
             steps {
-                sshagent(credentials: ['deploy-server-ssh']) {
+                dir("${DEPLOY_PATH}") { 
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ${DEPLOY_SERVER} "
-                            cd ${DEPLOY_PATH} &&
-                            docker compose pull ${COMPOSE_SERVICE} &&
-                            docker compose up -d --no-deps ${COMPOSE_SERVICE} &&
-                            docker image prune -f
-                        "
+                    docker compose pull ${COMPOSE_SERVICE}
+                    docker compose up -d --no-deps ${COMPOSE_SERVICE}
+                    docker image prune -f
                     '''
                 }
             }
