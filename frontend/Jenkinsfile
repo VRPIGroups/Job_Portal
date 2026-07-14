@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+
+    environment {
+        // ---- EDIT THESE ----
+        DOCKERHUB_NAMESPACE = 'nprathyusha1234'
+        IMAGE_NAME          = 'my-app-frontend'
+        SERVICE_DIR         = 'frontend'          // folder in repo with this service's code + Dockerfile
+        COMPOSE_SERVICE     = 'frontend'          // service name as defined in docker-compose.yml
+        DEPLOY_SERVER       = 'ec2-user@ip-172-31-10-12'  // e.g. ubuntu@203.0.113.10
+        DEPLOY_PATH         = '/opt/job-portal'           // folder on the server containing docker-compose.yml
+        // ---------------------
+
+        IMAGE_TAG  = "${env.BUILD_NUMBER}"
+        FULL_IMAGE = "${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}"
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', changelog: false, credentialsId: 'VRPIGroups', poll: false, url: 'https://github.com/VRPIGroups/Job_Portal.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir("${SERVICE_DIR}") {
+                    sh 'npm ci'
+                }
+            }
+        }
+
+
+        stage('Build Docker Image') {
+            steps {
+                dir("${SERVICE_DIR}") {
+                    sh "docker build -t ${FULL_IMAGE} -t ${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}:latest ."
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker push ${FULL_IMAGE}
+                        docker push ${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}:latest
+                        docker logout
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy via Docker Compose') {
+            steps {
+                sshagent(credentials: ['deploy-server-ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ${DEPLOY_SERVER} "
+                            cd ${DEPLOY_PATH} &&
+                            docker compose pull ${COMPOSE_SERVICE} &&
+                            docker compose up -d --no-deps ${COMPOSE_SERVICE} &&
+                            docker image prune -f
+                        "
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Deployed ${FULL_IMAGE} via Docker Compose successfully."
+        }
+        failure {
+            echo "❌ Pipeline failed. Check the stage logs above."
+        }
+        always {
+            sh 'docker system prune -f || true'
+        }
+    }
+}
