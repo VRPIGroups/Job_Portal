@@ -11,7 +11,7 @@ pipeline {
         SERVICE_DIR         = 'frontend'          // folder in repo with this service's code + Dockerfile
         COMPOSE_SERVICE     = 'frontend'          // service name as defined in docker-compose.yml
         DEPLOY_SERVER       = 'ec2-user@ip-172-31-10-12'  // e.g. ubuntu@203.0.113.10
-        DEPLOY_PATH         = '/opt/myapp'           // folder on the server containing docker-compose.yml
+        DEPLOY_PATH         = '/opt/job-portal'           // folder on the server containing docker-compose.yml
         // ---------------------
 
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
